@@ -13,15 +13,17 @@ class ValidationSpec : StringSpec({
 
     "Zero is invalid money" {
         shouldThrow<IllegalAmount> {
-            val err = validMoney(Money(0.toBigDecimal()))
-            if (err != null) throw err
+            validMoney(Money(0.toBigDecimal()))?.let {
+                throw it
+            }
         }
     }
 
     "Negative money is invalid" {
         shouldThrow<IllegalAmount> {
-            val err = validMoney(Money((-1.3).toBigDecimal()))
-            if (err != null) throw err
+            validMoney(Money((-1.3).toBigDecimal()))?.let {
+                throw it
+            }
         }
     }
 
@@ -36,8 +38,9 @@ class ValidationSpec : StringSpec({
     "Unknown account if account if does not exist in memory" {
         val emptyState = AllAccounts.empty()
         shouldThrow<AccountDoesNotExist> {
-            val err = emptyState.validAccount(AccountId.generate())
-            if (err != null) throw err
+            emptyState.validAccount(AccountId.generate())?.let {
+                throw it
+            }
         }
     }
 
@@ -50,8 +53,9 @@ class ValidationSpec : StringSpec({
 
         // No sufficient funds
         shouldThrow<InsufficientFunds> {
-            val err = state.hasSufficientFunds(accId, Money(11.toBigDecimal()))
-            if (err != null) throw err
+            state.hasSufficientFunds(accId, Money(11.toBigDecimal()))?.let {
+                throw it
+            }
         }
     }
 
