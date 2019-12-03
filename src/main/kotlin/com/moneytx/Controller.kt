@@ -5,6 +5,11 @@ import com.moneytx.domain.*
 import com.moneytx.logic.CommandActor
 import java.util.concurrent.CompletableFuture
 
+/**
+ * Controller for routes declared in Main.kt.
+ * All the Commands and Queries are sent to command actor for results.
+ * @property cmdActor Command actor to send commands to.
+ */
 class Controller(private val cmdActor: ActorRef) {
 
     fun createAccount(): CompletableFuture<Account> =

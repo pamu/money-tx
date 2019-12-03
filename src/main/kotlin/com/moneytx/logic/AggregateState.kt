@@ -6,7 +6,7 @@ class AggregateState {
 
     private var accounts = mutableMapOf<AccountId, Account>()
 
-    fun state(): ReadOnlyState = ReadOnlyState(accounts.toMap())
+    fun currState(): AllAccounts = AllAccounts(accounts.toMap())
 
     fun changeAmount(accId: AccountId, amount: Money, reduce: (Money, Money) -> Money): Unit {
         val account = accounts[accId]

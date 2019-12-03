@@ -7,6 +7,11 @@ interface EventHandler {
     fun handleEvent(event: Event): Unit
 }
 
+/**
+ * Updates state based on event. Mutable state must not be exposed.
+ * State can be mutated inside an actor.
+ * @property state Mutable application state (accounts)
+ */
 class EventHandlerImpl(private val state: AggregateState) : EventHandler {
 
     override fun handleEvent(event: Event): Unit = when (event) {

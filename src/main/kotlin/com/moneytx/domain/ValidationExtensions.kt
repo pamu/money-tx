@@ -2,7 +2,7 @@ package com.moneytx.domain
 
 // Validation either returns error or null value. Null means no error i.e valid.
 // Complex data class validations are built by composing simpler validations (see below).
-fun ReadOnlyState.validateCommand(cmd: Command): ValidationError? {
+fun AllAccounts.validateCommand(cmd: Command): ValidationError? {
     when (cmd) {
         is Command.CreateAccount -> {
             // This case does not occur as new random UUID is generated every time.
@@ -25,7 +25,7 @@ fun ReadOnlyState.validateCommand(cmd: Command): ValidationError? {
 }
 
 // Better to use validation from arrow-kt (https://arrow-kt.io/docs/apidocs/arrow-validation/)
-fun ReadOnlyState.hasSufficientFunds(accId: AccountId, withdrawAmount: Money): ValidationError? {
+fun AllAccounts.hasSufficientFunds(accId: AccountId, withdrawAmount: Money): ValidationError? {
     this.validAccount(accId)?.let { return it }
     validMoney(withdrawAmount)?.let { return it }
     val account = this.accounts[accId]!!
@@ -41,7 +41,7 @@ fun ReadOnlyState.hasSufficientFunds(accId: AccountId, withdrawAmount: Money): V
 
 // Basic validations
 // Validate account
-fun ReadOnlyState.validAccount(accId: AccountId, isPayee: Boolean = false): ValidationError? =
+fun AllAccounts.validAccount(accId: AccountId, isPayee: Boolean = false): ValidationError? =
         if (this.accounts.containsKey(accId)) null
         else AccountDoesNotExist(accId = accId, isPayee = isPayee)
 

@@ -48,9 +48,9 @@ data class AccountId(val value: UUID) {
  * @property accounts   Map to hold user accounts.
  *
  */
-data class ReadOnlyState(val accounts: Map<AccountId, Account>) {
+data class AllAccounts(val accounts: Map<AccountId, Account>) {
     companion object {
-        fun empty() = ReadOnlyState(emptyMap())
+        fun empty() = AllAccounts(emptyMap())
     }
 }
 

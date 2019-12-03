@@ -11,10 +11,31 @@ sealed class Command {
      */
     data class CreateAccount(override val accountId: AccountId) : Command()
 
+    /**
+     * Represents deposit.
+     * @property accountId Depositor account id.
+     * @property amount    Depositing amount.
+     */
     data class Deposit(override val accountId: AccountId, val amount: Money) : Command()
+
+    /**
+     * Represents withdrawal.
+     * @property accountId  Account owner account id.
+     * @property amount     Withdraw amount.
+     */
     data class Withdraw(override val accountId: AccountId, val amount: Money) : Command()
+
+    /**
+     * Represents transfer.
+     * @property accountId  Account owner
+     * @property payee      Account into which amount is being transferred.
+     * @property amount     Amount to transfer
+     * Note: Transfer can be seen as
+     * 1. Withdraw from accountId (amount)
+     * 2. Deposit into payee account
+     */
     data class Transfer(
             override val accountId: AccountId,
-            val amount: Money,
-            val payee: AccountId) : Command()
+            val payee: AccountId,
+            val amount: Money) : Command()
 }
