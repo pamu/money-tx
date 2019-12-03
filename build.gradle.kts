@@ -5,7 +5,7 @@ plugins {
 
 application {
     applicationName = "moneytx"
-    mainClassName = "com.moneytx.MainKt"
+    mainClassName = "com.moneytx.MoneyTxAppKt"
 }
 
 object Versions {
@@ -30,10 +30,9 @@ dependencies {
     implementation("com.fasterxml.jackson.core:jackson-databind:${Versions.jacksonDatabind}")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin:${Versions.JacksonKt}")
     implementation("com.typesafe.akka:akka-actor_2.13:${Versions.akkaActor}")
-    testImplementation("io.kotlintest:kotlintest-runner-junit5:3.3.0")
+    testImplementation("io.kotlintest:kotlintest-runner-junit5:${Versions.kotlinTest}")
     testImplementation("com.github.kittinunf.fuel:fuel:${Versions.fuel}")
     testImplementation("com.github.kittinunf.fuel:fuel-jackson:${Versions.fuelJackson}")
-    testImplementation("org.junit.jupiter:junit-jupiter:5.4.1")
 }
 
 repositories {

@@ -6,7 +6,7 @@ import com.moneytx.logic.CommandActor
 import java.util.concurrent.CompletableFuture
 
 /**
- * Controller for routes declared in Main.kt.
+ * Controller for routes declared in MoneyTxApp.kt.
  * All the Commands and Queries are sent to command actor for results.
  * @property cmdActor Command actor to send commands to.
  */
