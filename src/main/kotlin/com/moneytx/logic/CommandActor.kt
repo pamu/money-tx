@@ -67,6 +67,8 @@ class CommandActor : AbstractActor() {
 
     companion object {
 
+        const val TIME_OUT = 100L
+
         // Helper methods for convenience.
 
         // Ask actor account info using actor message.
@@ -74,7 +76,7 @@ class CommandActor : AbstractActor() {
                 cmdActor: ActorRef,
                 accId: AccountId
         ): CompletableFuture<Account?> =
-                Patterns.ask(cmdActor, CommandActorRequest.GetAccountInfo(accId), Duration.ofMillis(100))
+                Patterns.ask(cmdActor, CommandActorRequest.GetAccountInfo(accId), Duration.ofMillis(TIME_OUT))
                         .toCompletableFuture().thenApply {
                             when (it) {
                                 is CommandActorResponse.AccountInfo -> it.account
@@ -84,7 +86,7 @@ class CommandActor : AbstractActor() {
 
         // Send command to actor and get response from actor.
         fun handleCommandAndGetAccountInfo(cmdActor: ActorRef, cmd: Command): CompletableFuture<Account?> =
-                Patterns.ask(cmdActor, CommandActorRequest.HandleCommand(cmd), Duration.ofMillis(100))
+                Patterns.ask(cmdActor, CommandActorRequest.HandleCommand(cmd), Duration.ofMillis(TIME_OUT))
                         .toCompletableFuture().thenApply {
                             when (it) {
                                 is CommandActorResponse.CommandAccepted -> it.account
